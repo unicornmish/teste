@@ -4,7 +4,6 @@ export interface Item {
     isActive: boolean;
     createdAt: string;
   }
-  
 
   export interface FindManyOptions {
     skip?: number;
