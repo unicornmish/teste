@@ -36,7 +36,6 @@ export class ItemController {
     return this.itemService.findMany({
       skip: query.skip,
       take: query.take,
-      includeInactive: query.includeInactive,
       search: query.search,
     });
   }

@@ -8,9 +8,6 @@ export class ItemResponseDto {
   @ApiProperty({ description: 'Nome do item' })
   name: string;
 
-  @ApiProperty({ description: 'Indica se o item está ativo' })
-  isActive: boolean;
-
   @ApiProperty({ description: 'Data de criação do item' })
   createdAt: Date;
 

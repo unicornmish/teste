@@ -37,18 +37,16 @@ export class ItemService {
   async findMany(options: {
     skip?: number; // pular n itens
     take?: number; // pegar n itens
-    includeInactive?: boolean; // incluir ou não os inativos
     search?: string; // busca por nome
   }) {
     try {
-      const { skip = 0, take = 10, includeInactive = false, search } = options;
+      const { skip = 0, take = 10,  search } = options;
 
       // Busca os itens no banco com base nos filtros
       const items = await this.prisma.item.findMany({
         skip,
         take,
         where: {
-          ...(includeInactive ? {} : { isActive: true }), // se não incluir inativos, só busca os ativos
           ...(search ? { name: { contains: search, mode: 'insensitive' } } : {}), // busca por nome (se informado)
         },
         orderBy: { createdAt: 'desc' }, // ordena por data de criação
@@ -87,7 +85,7 @@ export class ItemService {
     try {
       // Atualiza todos os itens com os IDs informados, marcando como inativo
       const result = await this.prisma.item.updateMany({
-        where: { id: { in: ids }, isActive: true },
+        where: { id: { in: ids } }, 
         data: { isActive: false },
       });
 
@@ -104,7 +102,7 @@ export class ItemService {
     try {
       // Atualiza todos os itens com os IDs informados, marcando como ativo
       const result = await this.prisma.item.updateMany({
-        where: { id: { in: ids }, isActive: false },
+        where: { id: { in: ids } }, // Removido a condição isActive: false
         data: { isActive: true },
       });
 
