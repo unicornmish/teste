@@ -5,9 +5,6 @@
 ```bash
 $ npm install
 
-# Run database migrations
-$ npm run migration:run
-
 # Generate seed data
 $ npm run db:seed
 
